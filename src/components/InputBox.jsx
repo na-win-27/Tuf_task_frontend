@@ -3,10 +3,17 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import MoonLoader from "react-spinners/MoonLoader";
-
 import Button from "@mui/material/Button";
 
-export default function InputBox({ output, inp, onInput, postCodes, loading }) {
+export default function InputBox({
+  output,
+  inp,
+  onInput,
+  postCodes,
+  loading,
+  mode,
+  compile,
+}) {
   return (
     <Box
       style={{
@@ -29,18 +36,41 @@ export default function InputBox({ output, inp, onInput, postCodes, loading }) {
         {!output ? "Give Your Input" : "Compilation Result:"}
       </Typography>
 
-      <Typography
-        sx={{
-          color: "green",
-        }}
-        variant="h4"
-      >
-        {!output ? "" : output}
-      </Typography>
+      {!output ? null : (
+        <Typography
+          sx={{
+            flex: 2,
+            marginLeft: "5px",
+            color: "white",
+          }}
+          variant="h6"
+        >
+          Output
+        </Typography>
+      )}
+
+      {!output ? null : (
+        <TextField
+          sx={{
+            flex: 15,
+          }}
+          multiline
+          inputProps={{
+            style: {
+              color: "red",
+              border: "1px grey solid ",
+              width: "400px",
+              padding: "10px",
+            },
+          }}
+          rows={8}
+          value={output}
+        />
+      )}
 
       <TextField
         sx={{
-          flex: 20,
+          flex: 10,
         }}
         placeholder="Enter the Input for Compilation"
         multiline
@@ -52,7 +82,7 @@ export default function InputBox({ output, inp, onInput, postCodes, loading }) {
             padding: "10px",
           },
         }}
-        rows={10}
+        rows={7}
         value={inp}
         onChange={(e) => onInput(e.target.value)}
       />
@@ -67,11 +97,26 @@ export default function InputBox({ output, inp, onInput, postCodes, loading }) {
             width: "400px",
             marginLeft: "20px  ",
           }}
-          onClick={() => postCodes()}
+          onClick={() => compile()}
         >
-          Submit Code
+          Compile Code
         </Button>
       )}
+
+      <Button
+      disabled={loading}
+        variant="contained"
+        color="secondary"
+        sx={{
+          flex: 1,
+          width: "400px",
+          marginLeft: "20px  ",
+          marginTop: "10px",
+        }}
+        onClick={() => postCodes()}
+      >
+        {mode === "edit" ? "Save Changes" : "Save Code"}
+      </Button>
     </Box>
   );
 }

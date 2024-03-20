@@ -16,7 +16,7 @@ function App() {
         <Routes>
 
           <Route path="/:id" element={<InputPage mode="edit" />} />
-          <Route path="/" element={<InputPage />} />
+          <Route path="/" element={<div><InputPage mode="new"  /></div>} />
           <Route path="/savedCodes" element={<DisplayPage/>} />
    
         </Routes>

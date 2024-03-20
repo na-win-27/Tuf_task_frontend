@@ -27,7 +27,7 @@ export default function DisplayPage() {
     <>
     <Box sx={{width:'100vw',height:'90vh',display:'flex',justifyContent:'center',alignItems:'center'}}>
     
-    <TableComponent codes={codes}/>
+    <TableComponent loading={loading} codes={codes}/>
     </Box>
    
     </>

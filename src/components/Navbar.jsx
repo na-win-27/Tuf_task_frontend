@@ -46,10 +46,9 @@ export default function Navbar() {
                 color: "#E50914",
                 margin: "10px",
                 padding: "10px",
-               
               }}
             >
-              Submitted Code
+              Saved Codes
             </Button>
           </div>
         </div>
