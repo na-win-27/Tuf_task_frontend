@@ -13,7 +13,7 @@ export default function DisplayPage() {
   React.useEffect(() => {
     async function fetchData() {
       axios
-      .get("http://localhost:4000/genral")
+      .get("http://localhost:4000/api/v2/genral")
       .then(({data}) => {
         setLoading(false);
         setcodes(data.data)

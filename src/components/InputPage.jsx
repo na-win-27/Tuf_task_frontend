@@ -35,7 +35,7 @@ export default function InputPage({ mode }) {
 
   React.useEffect(() => {
     async function fetchData() {
-      axios.get(`http://localhost:4000/genral/${id}`).then(({ data }) => {
+      axios.get(`http://localhost:4000/api/v2/genral/${id}`).then(({ data }) => {
         setLoading(false);
         setcodeId(data.data.id);
         setUser(data.data.userId);
@@ -68,7 +68,7 @@ export default function InputPage({ mode }) {
     } else if (mode == "new") {
       setOpen(true);
       axios
-        .post("http://localhost:4000/genral", {
+        .post("http://localhost:4000/api/v2/genral", {
           username: user,
           langueage: language,
           code: code,
@@ -88,7 +88,7 @@ export default function InputPage({ mode }) {
     } else {
       setOpen(true);
       axios
-        .put(`http://localhost:4000/genral/code/${codeId}`, {
+        .put(`http://localhost:4000/api/v2/genral/code/${codeId}`, {
           username: user,
           langueage: language,
           code: code,
@@ -113,7 +113,7 @@ export default function InputPage({ mode }) {
   const compileCode = () => {
     setOpen(true);
     axios
-      .post("http://localhost:4000/judge", {
+      .post("http://localhost:4000/api/v2/judge", {
         username: user,
         langueage: language,
         code: code,
