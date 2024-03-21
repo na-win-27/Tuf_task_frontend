@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Editor from "@monaco-editor/react";
 import LanguageSelector from "./LangSelector";
+import MoonLoader from "react-spinners/MoonLoader";
 import InputBox from "./InputBox";
 import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
@@ -17,6 +18,7 @@ export default function InputPage({ mode }) {
   const [user, setUser] = React.useState("");
   const [code, setCode] = React.useState("");
   const [language, setLanguage] = React.useState("cpp");
+  const [status, setStatus] = React.useState("");
   const [stdIn, setStdIn] = React.useState("");
   const [stdOut, setStdOut] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -75,7 +77,13 @@ export default function InputPage({ mode }) {
         .then(({ data }) => {
           setOpen(false);
           setStdOut(data.data.stdOut);
+          setStatus("code Compiled Successfully");
           navigate("/savedCodes");
+        })
+        .catch((e) => {
+          setStatus("Error occured while Compiling");
+          setsnackbar(true);
+          setOpen(false);
         });
     } else {
       setOpen(true);
@@ -88,9 +96,16 @@ export default function InputPage({ mode }) {
         })
         .then(({ data }) => {
           setOpen(false);
-
+          setStatus("code Compiled Successfully");
+          setsnackbar(true);
           setStdOut(data.data.stdOut);
           navigate("/savedCodes");
+        })
+        .catch((e) => {
+          setStatus("Error occured while Compiling");
+          setsnackbar(true);
+          setLoading(false);
+          setOpen(false);
         });
     }
   };
@@ -109,11 +124,17 @@ export default function InputPage({ mode }) {
         setOpen(false);
         setsnackbar(true);
         setStdOut(data.data);
+        setStatus("code compiled successfully");
+      })
+      .catch((e) => {
+        setStatus("Error occured while Compiling");
+        setsnackbar(true);
+        setOpen(false);
       });
   };
 
   return loading ? (
-    <>Loading</>
+    <> <MoonLoader color="#36d7b7" size={150} loading /></>
   ) : (
     <Container component="main" maxWidth="xs">
       <Box
@@ -130,7 +151,7 @@ export default function InputPage({ mode }) {
           open={snackbar}
           autoHideDuration={6000}
           onClose={handleClose}
-          message="Code compiled"
+          message={status}
         />
         <Box sx={{ mt: 0.5 }}>
           <TextField

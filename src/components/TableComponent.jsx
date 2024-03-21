@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
 const columns = [
   {
@@ -17,7 +17,8 @@ const columns = [
     headerClassName: "super-app-theme--header",
     sortable: false,
     width: 100,
-    valueGetter: (params) => new Date(params.row.createdAt).toLocaleDateString(),
+    valueGetter: (params) =>
+      new Date(params.row.createdAt).toLocaleDateString(),
   },
   {
     field: "snippet",
@@ -26,7 +27,7 @@ const columns = [
     sortable: false,
     type: "String",
     valueGetter: (params) => `${params.row.snippet.substr(0, 99)}`,
-    width: 1100,
+    width: 750,
   },
   {
     field: "lang",
@@ -40,23 +41,23 @@ const columns = [
     headerName: "Input",
     headerClassName: "super-app-theme--header",
     sortable: false,
-    width: 100,
+    width: 250,
   },
   {
     field: "stdOut",
     headerName: "Output",
     sortable: false,
     headerClassName: "super-app-theme--header",
-    width: 200,
+    width: 250,
   },
 ];
 
 export default function TableComponent(props) {
   const navigate = useNavigate();
-
   return (
-    <div style={{ height: "70vh", width: "90%" }}>
+    <Box mt="10px" height="65vh">
       <Typography> Click on row to Open it in editor</Typography>
+
       <DataGrid
         disableColumnFilter
         disableColumnSelector
@@ -64,11 +65,9 @@ export default function TableComponent(props) {
         disableEval
         loading={props.loading}
         sx={{
-          boxShadow: 2,
-          border: 2,
-          borderColor: "primary.light",
           "& .MuiDataGrid-cell:hover": {
-            color: "primary.main",
+            color: "black",
+            backgroundColor: "red",
           },
           "& .MuiDataGrid-columnHeader": {
             borderRight: "3px black solid",
@@ -100,6 +99,6 @@ export default function TableComponent(props) {
           },
         }}
       />
-    </div>
+    </Box>
   );
 }

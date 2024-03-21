@@ -104,7 +104,7 @@ export default function InputBox({
       )}
 
       <Button
-      disabled={loading}
+        disabled={loading}
         variant="contained"
         color="secondary"
         sx={{

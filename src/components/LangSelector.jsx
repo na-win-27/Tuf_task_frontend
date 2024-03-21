@@ -9,22 +9,20 @@ import Box from "@mui/material/Box";
 const options = ["cpp", "javascript", "python", "java", "go"];
 
 const LanguageSelector = ({ language, onSelect }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [lang, setlang] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const open = Boolean(anchorEl);
+  const open = Boolean(lang);
   const handleClickListItem = (event) => {
-    setAnchorEl(event.currentTarget);
+    setlang(event.currentTarget);
   };
 
   const handleMenuItemClick = (event, index) => {
     onSelect(options[index]);
     setSelectedIndex(index);
-    setAnchorEl(null);
+    setlang(null);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  
 
   return (
     <Box sx={{ maxWidth: "200px" }}>
@@ -37,10 +35,10 @@ const LanguageSelector = ({ language, onSelect }) => {
         </ListItemButton>
       </List>
       <Menu
-        id="lock-menu"
-        anchorEl={anchorEl}
+        id="lang-menu"
+        anchorEl={lang}
         open={open}
-        onClose={handleClose}
+        
         MenuListProps={{
           role: "listbox",
         }}
