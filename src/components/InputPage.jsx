@@ -35,15 +35,17 @@ export default function InputPage({ mode }) {
 
   React.useEffect(() => {
     async function fetchData() {
-      axios.get(`http://localhost:4000/api/v2/genral/${id}`).then(({ data }) => {
-        setLoading(false);
-        setcodeId(data.data.id);
-        setUser(data.data.userId);
-        setLanguage(data.data.lang);
-        setCode(data.data.snippet);
-        setStdIn(data.data.stdIn);
-        setStdOut(data.data.stdOut);
-      }, []);
+      axios
+        .get(`https://tuf-server-bpc6.onrender.com/genral/${id}`)
+        .then(({ data }) => {
+          setLoading(false);
+          setcodeId(data.data.id);
+          setUser(data.data.userId);
+          setLanguage(data.data.lang);
+          setCode(data.data.snippet);
+          setStdIn(data.data.stdIn);
+          setStdOut(data.data.stdOut);
+        }, []);
     }
     if (mode === "edit") {
       setLoading(true);
@@ -68,7 +70,7 @@ export default function InputPage({ mode }) {
     } else if (mode == "new") {
       setOpen(true);
       axios
-        .post("http://localhost:4000/api/v2/genral", {
+        .post("https://tuf-server-bpc6.onrender.com/genral", {
           username: user,
           langueage: language,
           code: code,
@@ -88,7 +90,7 @@ export default function InputPage({ mode }) {
     } else {
       setOpen(true);
       axios
-        .put(`http://localhost:4000/api/v2/genral/code/${codeId}`, {
+        .put(`https://tuf-server-bpc6.onrender.com/genral/code/${codeId}`, {
           username: user,
           langueage: language,
           code: code,
@@ -113,7 +115,7 @@ export default function InputPage({ mode }) {
   const compileCode = () => {
     setOpen(true);
     axios
-      .post("http://localhost:4000/api/v2/judge", {
+      .post("https://tuf-server-bpc6.onrender.com/judge", {
         username: user,
         langueage: language,
         code: code,
@@ -134,7 +136,10 @@ export default function InputPage({ mode }) {
   };
 
   return loading ? (
-    <> <MoonLoader color="#36d7b7" size={150} loading /></>
+    <>
+      {" "}
+      <MoonLoader color="#36d7b7" size={150} loading />
+    </>
   ) : (
     <Container component="main" maxWidth="xs">
       <Box
