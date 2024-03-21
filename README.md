@@ -1,5 +1,9 @@
 # React + Vite
 
+# Hosted Link
+
+[https://tuf-task-frontend-seven.vercel.app/](https://tuf-task-frontend-seven.vercel.app/)
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
